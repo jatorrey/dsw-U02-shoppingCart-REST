@@ -1,0 +1,28 @@
+Como utilizar el poroyecto:
+
+1. Clonamos el repositorio en nuestro equipo
+2. Instalamos las dependencias con npm install
+3. Ejecutamos el servidor con npm start
+
+Abrimos nuestro programa POSTMAN para probar los endpoints, para poder importar los endpoints los pasos son:
+
+1. Abrir Postman
+2. Seleccionar la pestaña Import
+3. Seleccionar la opcion Raw y pegar el JSON que se encuentra en el archivo SERVICIOS WEB FINAL.postman_collection
+
+Que instrucciones hay en nuestro POSTMAN?
+
+Para la verificacion funcional de nuestro carrito de compras hay funciones principales, las funcionalidades extra se encuentran en la documentacion SWAGGER del proyecto.
+
+1. Crear usuario
+2. Crear producto
+3. Consultar usuario
+4. Consultar producto
+5. Crear carrito de compra
+6. Agregar producto al carrito
+7. Cerrar carrito de compra
+
+Las instrucciones 1. y 2. ya tienen un body dentro de la peticion para que sean mandados a la base de datos, para ejecutar las peticiones 3. y 4. tenemos que copiar los _id que nos retorna la respuesta 200 del respectivo caso que queramos consultar, y pegarlo en la URL del endpoint.
+Para ejecutar el caso 5, tenemos que pegar en el body el _id del usuario que hemos generado.
+Para ejecutar el caso 6, tenemos que pegar en el URL el _id que se genera del carrito, y en el body, pegar el _id del producto y la cantidad que queremos agregar.
+Para ejecutar el caso 7 simplemente tenemos que pegar el _id del carrito a la URL del endpoint.

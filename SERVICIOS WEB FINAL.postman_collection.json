@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "79512f06-1dd0-4df4-a53e-6b91f8b6ceb8",
+		"name": "SERVICIOS WEB FINAL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39047919"
+	},
+	"item": [
+		{
+			"name": "Crear usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rfc\": \"ABC101010111\",\r\n    \"name\": \"Juan Pérez\",\r\n    \"email\": \"juan.perez@example.com\",\r\n    \"password\": \"securepassword\",\r\n    \"direccion\": \"Calle 123\",\r\n    \"zip\": \"12345\",\r\n    \"tel\": 5512345678,\r\n    \"role\": \"USER\",\r\n    \"payMethod\": \"CREDIT\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/usuarios/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuarios",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear producto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Leche Entera LALA\",\r\n    \"description\": \"Leche entera marca LALA presentacion 1L\",\r\n    \"price\": 12.99,\r\n    \"category\": \"Lácteos\",\r\n    \"brand\": \"LALA\",\r\n    \"stock\": 50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/productos/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"productos",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar usuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/usuarios/6757da2c9d01df9527bd4f00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuarios",
+						"6757da2c9d01df9527bd4f00"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar producto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/productos/6757df5a383f442fa12a952e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"productos",
+						"6757df5a383f442fa12a952e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear carrito de compra",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\": \"6757da2c9d01df9527bd4f00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/carritos/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"carritos",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar producto al carrito",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"producto\": \"6757df5a383f442fa12a952e\",\r\n    \"cantidad\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/carritos/6757e1a714d63271b18f611d/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"carritos",
+						"6757e1a714d63271b18f611d",
+						"product"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
