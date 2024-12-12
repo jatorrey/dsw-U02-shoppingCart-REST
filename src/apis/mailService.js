@@ -3,7 +3,7 @@ const mailjet = require('node-mailjet')
 
 const mailjetClient = mailjet.apiConnect(
     process.env.MAILJET_PUBLIC_KEY,
-    process.env.MAILJET_PRIVATE_KEY
+    process.env.MAILJET_SECRET_KEY
 );
 
 const sendCartEmail = async (email, name, cartDetails, pdfLink) => {
