@@ -71,47 +71,6 @@ const getCartsByUserId = async (req, res) => {
 
 // Agregar un producto a un carrito
 const addProductToCart = async (req, res) => {
-    /*
-    try {
-        const { cartId } = req.params;
-        const { productoId, cantidad } = req.body;
-
-        // Verifica si el carrito existe
-        const cart = await Cart.findById(cartId);
-        if (!cart) {
-            return res.status(404).json({ message: 'Carrito no encontrado' });
-        }
-
-        // Verifica si el producto existe
-        const product = await Product.findById(productoId);
-        if (!product) {
-            return res.status(404).json({ message: 'Producto no encontrado' });
-        }
-
-        // Agrega o actualiza el producto en el carrito
-        const productoExistente = cart.productos.find(p => p.producto.equals(productoId));
-        if (productoExistente) {
-            // Si el producto ya existe, actualiza la cantidad
-            productoExistente.cantidad += cantidad;
-        } else {
-            // Si no existe, agrégalo al carrito
-            cart.productos.push({
-                producto: product._id,
-                cantidad
-            });
-        }
-
-        // Guarda el carrito actualizado
-        await cart.save();
-
-        // Recupera el carrito con los datos completos del producto
-        const populatedCart = await Cart.findById(cartId).populate('productos.producto').populate('usuario');
-
-        res.status(200).json(populatedCart);
-    } catch (error) {
-        res.status(500).json({ message: 'Error al agregar el producto', error: error.message });
-    }
-    */
     
     try {
         const { cartId } = req.params;
@@ -174,7 +133,9 @@ const removeProductFromCart = async (req, res) => {
         cart.productos = cart.productos.filter(item => item.producto._id.toString() !== producto);
 
         await cart.save();
-        res.status(200).json(calculateCartTotals(cartId));
+
+        const cartFinal = await calculateCartTotals(cartId);
+        return res.status(200).json(cartFinal);
     } catch (error) {
         res.status(500).json({ message: 'Error al eliminar el producto del carrito', error });
     }
