@@ -17,6 +17,7 @@
     "express": "^4.21.2",
     "facturapi": "^4.4.2",
     "firebase-admin": "^13.0.1",
+    "html-pdf": "^3.0.1",
     "mongoose": "^8.8.4",
     "node-mailjet": "^6.0.6",
     "puppeteer": "^23.10.3",

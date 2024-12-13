@@ -1,4 +1,5 @@
-const puppeteer = require('puppeteer');
+// const puppeteer = require('puppeteer');
+const pdf = require('html-pdf');
 const bucket = require('../apis/firebaseConfig');
 
 const generateCartPdf = async (email, name, cartDetails) => {
@@ -67,40 +68,32 @@ const generateCartPdf = async (email, name, cartDetails) => {
         </div>
     `;
 
+    // Crear una nueva promesa para manejar la operación asíncrona correctamente
+    return new Promise((resolve, reject) => {
+        pdf.create(htmlContent, { format: 'A4', margin: { top: "10mm", right: "20mm", bottom: "20mm", left: "20mm" } }).toBuffer(async (err, buffer) => {
+            if (err) {
+                console.error('Error al generar el PDF:', err);
+                reject(new Error('Error al generar el PDF'));
+                return;
+            }
 
-    // Lanzar Puppeteer y generar el PDF en memoria
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.setContent(htmlContent);
+            // Subir el buffer a Firebase Storage
+            const file = bucket.file(`carritos/${fileName}`);
+            await file.save(buffer, {
+                metadata: {
+                    contentType: 'application/pdf',
+                },
+            });
 
-    // Generar el PDF como un buffer en memoria
-    const pdfBuffer = await page.pdf({
-        format: 'A4',
-        margin: {
-            top: "10mm",
-            right: "20mm",
-            bottom: "20mm",
-            left: "20mm",
-        },
+            // Obtener el enlace público
+            const [url] = await file.getSignedUrl({
+                action: 'read',
+                expires: '03-01-2030', // Fecha de expiración
+            });
+
+            resolve(url); // Resuelve la promesa con la URL del archivo en Firebase
+        });
     });
-
-    await browser.close();
-
-    // Subir el buffer a Firebase Storage
-    const file = bucket.file(`carritos/${fileName}`);
-    await file.save(pdfBuffer, {
-        metadata: {
-            contentType: 'application/pdf',
-        },
-    });
-
-    // Obtener el enlace público
-    const [url] = await file.getSignedUrl({
-        action: 'read',
-        expires: '03-01-2030', // Fecha de expiración
-    });
-
-    return url; // Regresar la URL del archivo en Firebaseetorna el enlace público del archivo
-};
+}
 
 module.exports = { generateCartPdf };
