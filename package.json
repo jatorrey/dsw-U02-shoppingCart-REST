@@ -20,7 +20,6 @@
     "html-pdf": "^3.0.1",
     "mongoose": "^8.8.4",
     "node-mailjet": "^6.0.6",
-    "puppeteer": "^23.10.3",
     "stripe": "^17.4.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
